@@ -73,7 +73,7 @@ public class HeapSort {
 
     /**
      * 将一个数组（二叉树）调整成一个最大堆
-     * 功能： 完成 将 以 i 对应的非叶子结点的树调整成大顶堆
+     * 功能： 完成将以i对应的非叶子结点的树调整成大顶堆
      * int arr[] = {4, 6, 8, 5, 9}; => i = 1 => adjustHeap => 得到 {4, 9, 8, 5, 6}
      * 如果我们再次调用  adjustHeap 传入的是 i = 0 => 得到 {4, 9, 8, 5, 6} => {9,6,8,5, 4}
      *
@@ -83,7 +83,7 @@ public class HeapSort {
      */
     public static void adjustHeap(int[] arr, int i, int length) {
         int temp = arr[i];
-        //k = i * 2 + 1 , k 是i结点的左子结点
+        //k = i * 2 + 1 , k是i结点的左子结点
         for (int k = 2 * i + 1; k < length; k = k * 2 + 1) {
             if (k + 1 < length && arr[k] < arr[k + 1]) //说明左子结点的值小于右子结点的值
                 k++;
@@ -93,7 +93,7 @@ public class HeapSort {
             } else
                 break;
         }
-        //当for循环结束后将以i为父结点的树的最大值，放在最顶(局部)
+        //当for循环结束后将以i为父结点的树的最大值,放在最顶(局部)
         arr[i] = temp; //将temp值放到调整后的位置
     }
 
@@ -107,41 +107,53 @@ public class HeapSort {
      * @param arr
      */
     public static void heapSort(int arr[]) {
-        int n = arr.length;
+        int len = arr.length;
         //1.Heap construction:构造"最大堆"--从下往上
-        for (int k = n / 2; k >= 1; k--)
-            sink(arr, k, n);
+        for (int k = len / 2; k >= 1; k--)
+            sink(arr, k, len);
 
         //sort down
-        while (n > 1) {
-            exch(arr, 1, n--);
-            sink(arr, 1, n);
+        while (len > 1) {
+            exch(arr, 1, len--);
+            sink(arr, 1, len);
         }
     }
 
-    private static void sink(int a[], int k, int n) {
-        while (2 * k <= n) {
-            int j = 2 * k;
-            if (j < n && a[j - 1] < a[j])
+    /**
+     * @param arr    数组
+     * @param i      第几个元素，从1开始
+     * @param length 数组长度
+     */
+    private static void sink(int arr[], int i, int length) {
+        while (2 * i <= length) {
+            int j = 2 * i;
+            if (j < length && arr[j - 1] < arr[j])
                 j++;
-            if (a[k - 1] >= a[j - 1]) {
+            if (arr[i - 1] >= arr[j - 1]) {
                 /**
                  * 没有元素需要移动,停止处理
                  * (只有在当前元素需要交换后,才需要检查后面的是否需要移动)
                  */
                 break;
             }
-            exch(a, k, j);
-            k = j;
+            exch(arr, i, j);
+            i = j;
         }
     }
 
-    private static void exch(int a[], int i, int j) {
+    /**
+     * 交换数组元素
+     *
+     * @param arr 数组
+     * @param i   数组中第i个元素
+     * @param j   数组中第j个元素
+     */
+    private static void exch(int arr[], int i, int j) {
         if (i >= j)
             return;
-        a[i - 1] = a[i - 1] ^ a[j - 1];
-        a[j - 1] = a[j - 1] ^ a[i - 1];
-        a[i - 1] = a[i - 1] ^ a[j - 1];
+        arr[i - 1] = arr[i - 1] ^ arr[j - 1];
+        arr[j - 1] = arr[j - 1] ^ arr[i - 1];
+        arr[i - 1] = arr[i - 1] ^ arr[j - 1];
     }
 
 }
