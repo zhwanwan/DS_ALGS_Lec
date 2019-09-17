@@ -1,4 +1,4 @@
-package com.ds.lec10.tree;
+package com.ds.lec10.tree.huffman;
 
 /**
  * @author zhwanwan

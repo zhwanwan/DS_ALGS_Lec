@@ -1,6 +1,10 @@
-package com.ds.lec10.tree;
+package com.ds.lec10.tree.huffman;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * HuffmanTree(哈夫曼树)

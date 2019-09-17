@@ -1,10 +1,15 @@
-package com.ds.lec10.tree;
+package com.ds.lec10.tree.huffman;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 哈夫曼编码
@@ -23,7 +28,7 @@ import java.util.*;
 public class HuffmanCode {
     public static void main(String[] args) {
 
-        String content = "i like like like java do you like a java";
+        /*String content = "i like like like java do you like a java";
         System.out.printf("原字符是\n%s\n长度为 %d\n", content, content.length());
         byte[] contentBytes = content.getBytes();
         System.out.println(Arrays.toString(contentBytes));
@@ -38,13 +43,44 @@ public class HuffmanCode {
         System.out.println("压缩后的结果是:" + Arrays.toString(huffmanCodeBytes) + " 长度= " + huffmanCodeBytes.length);
         //System.out.println(byteToString(true, (byte) 1));
         byte[] sourceBytes = decode(huffmanCodes, huffmanCodeBytes);
-        System.out.println(new String(sourceBytes));
+        System.out.println(new String(sourceBytes));*/
 
         //测试文件压缩
-        System.out.println("~~~~~~测试文件压缩~~~~~~");
+        /*System.out.println("~~~~~~测试文件压缩~~~~~~");
         String srcFile = "C:\\Users\\zhwanwan\\Pictures\\2020-vision1.jpg";
-        String destFile = "D:\\2020-vision1.zip";
-        zipFile(srcFile,destFile);
+        String dstFile = "D:\\2020-vision1.zip";
+        zipFile(srcFile, dstFile);
+        System.out.println("压缩完毕！");*/
+
+        System.out.println("测试文件解压");
+        String zipFile = "D:\\2020-vision1.zip";
+        String destFile = "D:\\2020-vision1.jpg";
+        unzipFile(zipFile, destFile);
+        System.out.println("解压完毕！");
+
+    }
+
+
+    /**
+     * 解压文件
+     *
+     * @param zipFile
+     * @param destFile
+     */
+    public static void unzipFile(String zipFile, String destFile) {
+        try (FileInputStream fis = new FileInputStream(zipFile);
+             ObjectInputStream ois = new ObjectInputStream(fis);
+             FileOutputStream fos = new FileOutputStream(destFile)
+        ) {
+            byte[] huffmanBytes = (byte[]) ois.readObject();
+            Map<Byte, String> huffmanCodes = (Map<Byte, String>) ois.readObject();
+            //解码
+            byte[] bytes = decode(huffmanCodes, huffmanBytes);
+            //写入文件
+            fos.write(bytes);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -56,7 +92,7 @@ public class HuffmanCode {
     public static void zipFile(String srcFile, String destFile) {
         try (FileInputStream fis = new FileInputStream(srcFile);
              FileOutputStream fos = new FileOutputStream(destFile);
-             ObjectOutputStream oos = new ObjectOutputStream(fos);
+             ObjectOutputStream oos = new ObjectOutputStream(fos)
         ) {
 
             //创建一个和源文件大小一样的byte[]
@@ -103,7 +139,7 @@ public class HuffmanCode {
             boolean flag = true;
             Byte b = null;
             while (flag) {
-                String key = stringBuilder.substring(i, i + count); //substring左闭右开
+                String key = stringBuilder.substring(i, i + count); //i不动让count移动，指定匹配到一个字符
                 b = map.get(key);
                 if (b == null) //未匹配
                     count++;

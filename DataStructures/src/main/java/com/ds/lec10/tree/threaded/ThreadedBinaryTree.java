@@ -1,4 +1,4 @@
-package com.ds.lec10.tree;
+package com.ds.lec10.tree.threaded;
 
 /**
  * 线索化二叉树

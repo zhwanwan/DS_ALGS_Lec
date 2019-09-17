@@ -1,4 +1,4 @@
-package com.ds.lec10.tree;
+package com.ds.lec10.tree.threaded;
 
 import java.util.Deque;
 import java.util.LinkedList;
