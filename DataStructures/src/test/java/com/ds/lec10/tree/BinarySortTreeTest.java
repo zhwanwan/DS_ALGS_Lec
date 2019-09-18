@@ -18,7 +18,13 @@ public class BinarySortTreeTest {
         bst.put(5, "Tom");
         bst.put(1, "Jay");
         bst.put(9, "Zach");
+        bst.put(4, "Ram");
+
         bst.infixOrder();
+        System.out.println("树高:" + bst.height());
+        Iterable<Integer> keys = bst.getKeysByLevelOrder();
+        keys.forEach(k -> System.out.print(k + " "));
+        System.out.println();
         bst.delete(1);
         bst.delete(7);
         System.out.println("删除后");

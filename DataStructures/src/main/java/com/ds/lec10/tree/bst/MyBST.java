@@ -1,5 +1,12 @@
 package com.ds.lec10.tree.bst;
 
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author zhwanwan
  * @create 2019-09-18 5:09 PM
@@ -158,6 +165,60 @@ public class MyBST<Key extends Comparable<Key>, Value> {
 
     public void infixOrder() {
         infixOrder(root);
+    }
+
+    private int height(BSTNode x) {
+        if (x == null)
+            return -1;
+        return 1 + Math.max(height(x.left), height(x.right));
+    }
+
+    //树的高度
+    public int height() {
+        return height(root);
+    }
+
+    public Iterable<Key> getKeysByLevelOrder() {
+        if (root == null)
+            return null;
+        Deque<BSTNode> queue = new LinkedList<>();
+        List<Key> list = new ArrayList<>();
+        queue.push(root);
+        BSTNode cur;
+        while (!queue.isEmpty()) {
+            cur = queue.poll();
+            list.add(cur.key);
+            if (cur.left != null)
+                queue.offer(cur.left);
+            if (cur.right != null)
+                queue.offer(cur.right);
+        }
+        return list;
+    }
+
+    private Map<Key, Integer> getKeyHeightMap() {
+        if (root == null)
+            return null;
+        Deque<BSTNode> queue = new LinkedList<>();
+        Map<Key, Integer> map = new HashMap<>();
+        queue.push(root);
+        BSTNode cur;
+        while (!queue.isEmpty()) {
+            cur = queue.poll();
+            map.put(cur.key, height(cur));
+            if (cur.left != null)
+                queue.offer(cur.left);
+            if (cur.right != null)
+                queue.offer(cur.right);
+        }
+        return map;
+    }
+
+    public void printByLevel() {
+        Map<Key, Integer> map = getKeyHeightMap();
+        if (map != null) {
+
+        }
     }
 
 }
