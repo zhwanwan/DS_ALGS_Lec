@@ -149,8 +149,8 @@ public class BST<Key extends Comparable<Key>, Value> {
                 //左右都存在结点
                 Node t = x;
                 x = min(t.right);
-                x.left = t.left;
                 x.right = deleteMin(t.right);
+                x.left = t.left;
 
             }
         }
