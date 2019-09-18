@@ -225,8 +225,10 @@ public class BST<Key extends Comparable<Key>, Value> {
             Node x = queue.poll();
             if (x == null) continue;
             keys.push(x.key);
-            queue.push(x.left);
-            queue.push(x.right);
+            if (x.left != null)
+                queue.push(x.left);
+            if (x.right != null)
+                queue.push(x.right);
         }
         return keys;
     }
