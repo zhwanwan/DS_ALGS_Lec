@@ -49,13 +49,13 @@ public class BST<Key extends Comparable<Key>, Value> {
     //查找指定key
     public Value get(Key key) {
         if (key == null)
-            throw new IllegalArgumentException("argument to contains() is null");
+            throw new IllegalArgumentException("argument to get() is null");
         return get(root, key);
     }
 
     private Value get(Node x, Key key) {
         if (key == null)
-            throw new IllegalArgumentException("argument to contains() is null");
+            throw new IllegalArgumentException("argument to get() is null");
         int cmp = key.compareTo(x.key);
         if (cmp > 0)
             return get(x.right, key);
@@ -69,7 +69,7 @@ public class BST<Key extends Comparable<Key>, Value> {
     public void put(Key key, Value value) {
         if (key == null)
             throw new IllegalArgumentException("key can't be null");
-        put(root, key, value);
+        root = put(root, key, value);
     }
 
 
