@@ -437,4 +437,28 @@ public class MyAVLTreeST<Key extends Comparable<Key>, Value> {
         return isBST(node.left, min, node.key) && isBST(node.right, node.key, max);
     }
 
+    private boolean isSizeConsistent() {
+        return isSizeConsistent(root);
+    }
+
+    private boolean isSizeConsistent(AVLSTNode node) {
+        if (node == null)
+            return true;
+        if (node.size != size(node.left) + size(node.right) + 1)
+            return false;
+        return isSizeConsistent(node.left) && isSizeConsistent(node.right);
+    }
+
+    private boolean isRankConsistent() {
+        for (int i = 0; i < size(); i++) {
+            if (i != rank(select(i)))
+                return false;
+        }
+        for (Key key : keys()) {
+            if (key.compareTo(select(rank(key))) != 0)
+                return false;
+        }
+        return true;
+    }
+
 }
