@@ -49,8 +49,11 @@ public class MyBST<Key extends Comparable<Key>, Value> {
     }
 
     private Value get(BSTNode x, Key key) {
-        if (key == null)
+        if (x == null)
+            return null;
+        if (key == null) {
             throw new IllegalArgumentException("key cannot be null");
+        }
         int cmp = key.compareTo(x.key);
         if (cmp > 0)
             return get(x.right, key);
@@ -154,13 +157,29 @@ public class MyBST<Key extends Comparable<Key>, Value> {
     }
 
     private void infixOrder(BSTNode x) {
-        if (x == null)
+        /*if (x == null)
             return;
         if (x.left != null)
             infixOrder(x.left);
         System.out.println(x);
         if (x.right != null)
-            infixOrder(x.right);
+            infixOrder(x.right);*/
+        //implements by stack
+        if (x == null)
+            return;
+        Deque<BSTNode> stack = new LinkedList<>();
+        BSTNode current = x;
+        while (current != null || !stack.isEmpty()) {
+            while (current != null) {
+                stack.push(current);
+                current = current.left;
+            }
+            if (!stack.isEmpty()) {
+                current = stack.pop();
+                System.out.println(current);
+                current = current.right;
+            }
+        }
     }
 
     public void infixOrder() {

@@ -11,8 +11,12 @@ public class BinarySortTree {
         for (int i = 0; i < arr.length; i++) {
             bst.add(new Node(arr[i]));
         }
+        System.out.println("先序遍历：");
+        bst.preOrder();
         System.out.println("中序遍历二叉排序树~");
         bst.infixOrder();
+        System.out.println("后续遍历：");
+        bst.postOrder();
         //测试删除叶子节点
         bst.delete(10);
         bst.delete(3);
@@ -45,6 +49,19 @@ public class BinarySortTree {
             root.infixOrderByStack();
         else
             System.out.println("二叉树为空！");
+    }
+
+    public void preOrder() {
+        if (root != null)
+            root.preOrderByStack();
+        else
+            System.out.println("二叉树为空！");
+    }
+
+    public void postOrder() {
+        if (root != null)
+            root.postOrderByStack();
+        System.out.println("二叉树为空！");
     }
 
     public Node search(int value) {

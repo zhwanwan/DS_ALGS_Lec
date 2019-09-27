@@ -99,6 +99,58 @@ public class Node {
         }
     }
 
+    public void preOrder() {
+        System.out.println(this);
+        if (this.left != null)
+            this.left.preOrder();
+        if (this.right != null)
+            this.right.preOrder();
+    }
+
+    public void preOrderByStack() {
+        Deque<Node> stack = new LinkedList<>();
+        Node current;
+        stack.push(this);
+        while (!stack.isEmpty()) {
+            current = stack.pop();
+            System.out.println(current);
+            if (current.right != null)
+                stack.push(current.right);
+            if (current.left != null)
+                stack.push(current.left);
+
+        }
+    }
+
+    public void postOrder() {
+        if (this.left != null)
+            this.left.preOrder();
+        if (this.right != null)
+            this.right.preOrder();
+        System.out.println(this);
+    }
+
+    /**
+     * 后续非递归遍历
+     * 使用双栈实现
+     */
+    public void postOrderByStack() {
+        Deque<Node> stack = new LinkedList<>();
+        Deque<Node> out = new LinkedList<>();
+        Node current;
+        stack.push(this);
+        while (!stack.isEmpty()) {
+            current = stack.pop();
+            out.push(current);
+            if (current.left != null)
+                stack.push(current.left);
+            if (current.right != null)
+                stack.push(current.right);
+        }
+        while (!out.isEmpty())
+            System.out.println(out.pop());
+    }
+
 
     /**
      * 查找指定结点
