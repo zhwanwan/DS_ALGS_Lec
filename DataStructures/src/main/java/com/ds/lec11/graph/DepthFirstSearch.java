@@ -50,7 +50,7 @@ public class DepthFirstSearch {
             throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
     }
 
-    //非递归DFS
+    //非递归DFS--借助于栈
     public DepthFirstSearch(int s, Graph G) {
         marked = new boolean[G.V()];
         validateVertex(s);
@@ -63,14 +63,16 @@ public class DepthFirstSearch {
         marked[s] = true;
         count++;
         stack.push(s);
+        System.out.println("访问结点：" + s);
         while (!stack.isEmpty()) {
             int v = stack.peek();
-            if (adj[v].hasNext()) {
-                int w = adj[v].next();
+            if (adj[v].hasNext()) { //顶点v有相邻顶点
+                int w = adj[v].next(); //邻接点w
                 if (!marked[w]) {
                     marked[w] = true;
                     count++;
                     stack.push(w);
+                    System.out.println("访问结点：" + w);
                 }
             } else {
                 stack.pop();
@@ -84,10 +86,10 @@ public class DepthFirstSearch {
         G.addEdge(0, 2);
         G.addEdge(1, 2);
         G.addEdge(2, 3);
-        G.addEdge(3, 4);
         G.addEdge(2, 4);
+        G.addEdge(3, 4);
         System.out.println(G);
-        DepthFirstSearch search = new DepthFirstSearch(0, G);
+        DepthFirstSearch search = new DepthFirstSearch(2, G);
         for (int v = 0; v < G.V(); v++) {
             if (search.marked(v))
                 System.out.print(v + " ");

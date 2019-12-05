@@ -76,6 +76,7 @@ public class MatrixGraph {
     }
 
     public int getWeight(int v1, int v2) {
+        checkVertex(v1, v2);
         return edges[v1][v2];
     }
 
@@ -84,9 +85,18 @@ public class MatrixGraph {
     }
 
     public void insertEdge(int v1, int v2, int weight) {
+        checkVertex(v1, v2);
         edges[v1][v2] = weight;
         edges[v2][v1] = weight;
         numOfEdges++;
+    }
+
+    private void checkVertex(int v1, int v2) {
+        int vertexNum = vertexList.size();
+        if (v1 < 0 || v1 >= vertexNum)
+            throw new IllegalArgumentException("vertex " + v1 + " is not between 0 and " + (vertexNum - 1));
+        if (v2 < 0 || v2 >= vertexNum)
+            throw new IllegalArgumentException("vertex " + v2 + " is not between 0 and " + (vertexNum - 1));
     }
 
     public void showGraph() {
@@ -103,6 +113,7 @@ public class MatrixGraph {
     }
 
     public int getNextNeighbor(int v1, int v2) {
+        checkVertex(v1, v2);
         for (int i = v2 + 1; i < vertexList.size(); i++) {
             if (edges[v1][i] > 0)
                 return i;

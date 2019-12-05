@@ -2,6 +2,7 @@ package com.ds.lec11.graph;
 
 /**
  * 邻接表数组实现的图
+ * 邻接表由数组+链表组成
  */
 public class Graph {
 
@@ -16,7 +17,7 @@ public class Graph {
      */
     public Graph(int V) {
         if (V < 0)
-            throw new IllegalArgumentException("Number of vertices must be nonnegative.");
+            throw new IllegalArgumentException("Number of vertices must be non-negative.");
         this.V = V;
         this.E = 0;
         adj = (Bag<Integer>[]) new Bag[V];
