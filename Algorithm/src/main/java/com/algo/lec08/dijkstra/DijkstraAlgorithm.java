@@ -21,7 +21,7 @@ public class DijkstraAlgorithm {
         char[] vertex = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
         //邻接矩阵
         int[][] matrix = new int[vertex.length][vertex.length];
-        final int N = 65535;// 表示不可以连接
+        final int N = 65535;// N表示不可以连接
         matrix[0] = new int[]{N, 5, 7, N, N, N, 2};
         matrix[1] = new int[]{5, N, N, 9, N, N, 3};
         matrix[2] = new int[]{7, N, N, N, 8, N, N};
